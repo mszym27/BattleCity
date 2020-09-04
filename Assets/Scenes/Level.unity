@@ -171,6 +171,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20411a04deceb444491ff5efc4354871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovementSpeed: 10
+  input:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+  controller: {fileID: 0}
 --- !u!4 &17731844
 Transform:
   m_ObjectHideFlags: 0
@@ -458,6 +468,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20411a04deceb444491ff5efc4354871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovementSpeed: 10
+  input:
+    m_Name: Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 004606e3-2c57-46b5-b642-6bc09b4e9b60
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: Move
+      m_Id: 44f3c0db-520b-40bc-a9d4-40caf50275bc
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input
+      m_Flags: 4
+    - m_Name: up
+      m_Id: d3b43b75-17d2-4e31-bf51-f7ef01b0c375
+      m_Path: <Keyboard>/upArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input
+      m_Flags: 8
+    - m_Name: down
+      m_Id: cac42264-92a8-4a14-93a7-4363e18d0554
+      m_Path: <Keyboard>/downArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 1b8c2470-bc33-41a6-b85b-f70a97999f9c
+      m_Path: <Keyboard>/leftArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input
+      m_Flags: 8
+    - m_Name: right
+      m_Id: dcb8cbaa-7c92-433c-87ed-47d49fd84690
+      m_Path: <Keyboard>/rightArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input
+      m_Flags: 8
+  controller: {fileID: 274021510}
+--- !u!143 &274021510
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274021507}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &386951345
 GameObject:
   m_ObjectHideFlags: 0
