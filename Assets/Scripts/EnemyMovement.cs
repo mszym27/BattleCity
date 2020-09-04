@@ -23,7 +23,7 @@ public class EnemyMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
         float movementStep = movementSpeed * Time.deltaTime;
-        float rotationStep = rotationSpeed * Time.deltaTime;
+        float rotationStep = rotationSpeed;
 
         Vector3 directionToTarget = targetWaypoint.position - transform.position;
         Quaternion rotationToTarget = Quaternion.LookRotation(directionToTarget); 

@@ -1,0 +1,114 @@
+warning: LF will be replaced by CRLF in Assets/Scenes/Level.unity.
+The file will have its original line endings in your working directory
+[1mdiff --git a/Assets/Black.mat b/Assets/Black.mat[m
+[1mdeleted file mode 100644[m
+[1mindex 5c803d1..0000000[m
+[1m--- a/Assets/Black.mat[m
+[1m+++ /dev/null[m
+[36m@@ -1,78 +0,0 @@[m
+[31m-%YAML 1.1[m
+[31m-%TAG !u! tag:unity3d.com,2011:[m
+[31m---- !u!21 &2100000[m
+[31m-Material:[m
+[31m-  serializedVersion: 6[m
+[31m-  m_ObjectHideFlags: 0[m
+[31m-  m_CorrespondingSourceObject: {fileID: 0}[m
+[31m-  m_PrefabInstance: {fileID: 0}[m
+[31m-  m_PrefabAsset: {fileID: 0}[m
+[31m-  m_Name: Black[m
+[31m-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}[m
+[31m-  m_ShaderKeywords: _ALPHABLEND_ON[m
+[31m-  m_LightmapFlags: 4[m
+[31m-  m_EnableInstancingVariants: 0[m
+[31m-  m_DoubleSidedGI: 0[m
+[31m-  m_CustomRenderQueue: 3000[m
+[31m-  stringTagMap:[m
+[31m-    RenderType: Transparent[m
+[31m-  disabledShaderPasses: [][m
+[31m-  m_SavedProperties:[m
+[31m-    serializedVersion: 3[m
+[31m-    m_TexEnvs:[m
+[31m-    - _BumpMap:[m
+[31m-        m_Texture: {fileID: 0}[m
+[31m-        m_Scale: {x: 1, y: 1}[m
+[31m-        m_Offset: {x: 0, y: 0}[m
+[31m-    - _DetailAlbedoMap:[m
+[31m-        m_Texture: {fileID: 0}[m
+[31m-        m_Scale: {x: 1, y: 1}[m
+[31m-        m_Offset: {x: 0, y: 0}[m
+[31m-    - _DetailMask:[m
+[31m-        m_Texture: {fileID: 0}[m
+[31m-        m_Scale: {x: 1, y: 1}[m
+[31m-        m_Offset: {x: 0, y: 0}[m
+[31m-    - _DetailNormalMap:[m
+[31m-        m_Texture: {fileID: 0}[m
+[31m-        m_Scale: {x: 1, y: 1}[m
+[31m-        m_Offset: {x: 0, y: 0}[m
+[31m-    - _EmissionMap:[m
+[31m-        m_Texture: {fileID: 0}[m
+[31m-        m_Scale: {x: 1, y: 1}[m
+[31m-        m_Offset: {x: 0, y: 0}[m
+[31m-    - _MainTex:[m
+[31m-        m_Texture: {fileID: 0}[m
+[31m-        m_Scale: {x: 1, y: 1}[m
+[31m-        m_Offset: {x: 0, y: 0}[m
+[31m-    - _MetallicGlossMap:[m
+[31m-        m_Texture: {fileID: 0}[m
+[31m-        m_Scale: {x: 1, y: 1}[m
+[31m-        m_Offset: {x: 0, y: 0}[m
+[31m-    - _OcclusionMap:[m
+[31m-        m_Texture: {fileID: 0}[m
+[31m-        m_Scale: {x: 1, y: 1}[m
+[31m-        m_Offset: {x: 0, y: 0}[m
+[31m-    - _ParallaxMap:[m
+[31m-        m_Texture: {fileID: 0}[m
+[31m-        m_Scale: {x: 1, y: 1}[m
+[31m-        m_Offset: {x: 0, y: 0}[m
+[31m-    m_Floats:[m
+[31m-    - _BumpScale: 1[m
+[31m-    - _Cutoff: 0.5[m
+[31m-    - _DetailNormalMapScale: 1[m
+[31m-    - _DstBlend: 10[m
+[31m-    - _GlossMapScale: 1[m
+[31m-    - _Glossiness: 0.5[m
+[31m-    - _GlossyReflections: 1[m
+[31m-    - _Metallic: 0[m
+[31m-    - _Mode: 2[m
+[31m-    - _OcclusionStrength: 1[m
+[31m-    - _Parallax: 0.02[m
+[31m-    - _SmoothnessTextureChannel: 0[m
+[31m-    - _SpecularHighlights: 1[m
+[31m-    - _SrcBlend: 5[m
+[31m-    - _UVSec: 0[m
+[31m-    - _ZWrite: 0[m
+[31m-    m_Colors:[m
+[31m-    - _Color: {r: 0, g: 0, b: 0, a: 1}[m
+[31m-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}[m
+[1mdiff --git a/Assets/Black.mat.meta b/Assets/Black.mat.meta[m
+[1mdeleted file mode 100644[m
+[1mindex 7620d45..0000000[m
+[1m--- a/Assets/Black.mat.meta[m
+[1m+++ /dev/null[m
+[36m@@ -1,8 +0,0 @@[m
+[31m-fileFormatVersion: 2[m
+[31m-guid: a9db038c400193e478313ecabadbb916[m
+[31m-NativeFormatImporter:[m
+[31m-  externalObjects: {}[m
+[31m-  mainObjectFileID: 0[m
+[31m-  userData: [m
+[31m-  assetBundleName: [m
+[31m-  assetBundleVariant: [m
+[1mdiff --git a/Assets/NESGraphics/brick.png b/Assets/NESGraphics/brick.png[m
+[1mindex ff5fb0c..d72a45e 100644[m
+Binary files a/Assets/NESGraphics/brick.png and b/Assets/NESGraphics/brick.png differ
+[1mdiff --git a/Assets/Scenes/Level.unity b/Assets/Scenes/Level.unity[m
+[1mindex af876d6..1cc0c14 100644[m
+[1m--- a/Assets/Scenes/Level.unity[m
+[1m+++ b/Assets/Scenes/Level.unity[m
+[36m@@ -178,13 +178,13 @@[m [mTransform:[m
+   m_PrefabInstance: {fileID: 0}[m
+   m_PrefabAsset: {fileID: 0}[m
+   m_GameObject: {fileID: 17731842}[m
+[31m-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}[m
+[31m-  m_LocalPosition: {x: 0, y: 0, z: 0}[m
+[32m+[m[32m  m_Lo
