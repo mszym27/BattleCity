@@ -91,7 +91,7 @@ prawo: 1.60
         // down
         if (finalVector.z == -1)
         {
-            var target = new Quaternion(0, 1, 0, 0.7f);
+            var target = new Quaternion(0, -0.7f, 0, 0);
 
             this.transform.rotation = target;
         }
