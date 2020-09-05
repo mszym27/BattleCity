@@ -77,42 +77,30 @@ prawo: 1.60
         // left
         if (finalVector.x == -1)
         {
-            Vector3 rotation = new Vector3(0, -1.6f - currentRotation, 0);
-            
-            Debug.Log("left");
-            Debug.Log("TargetRotation" + rotation);
+            var target = new Quaternion(0, -0.7f, 0, 0.7f);
 
-            this.transform.Rotate(rotation);
+            this.transform.rotation = target;
         }
         // right
         if (finalVector.x == 1)
         {
-            Vector3 rotation = new Vector3(0, 1.6f - currentRotation, 0);
+            var target = new Quaternion(0, 0.7f, 0, 0.7f);
 
-            Debug.Log("right");
-            Debug.Log("TargetRotation" + rotation);
-
-            this.transform.Rotate(rotation);
+            this.transform.rotation = target;
         }
         // down
         if (finalVector.z == -1)
         {
-            Vector3 rotation = new Vector3(0, 90.0f - currentRotation, 0);
+            var target = new Quaternion(0, 1, 0, 0.7f);
 
-            Debug.Log("down");
-            Debug.Log("TargetRotation" + rotation);
-
-            this.transform.Rotate(rotation);
+            this.transform.rotation = target;
         }
         // up
         if (finalVector.z == 1)
         {
-            Vector3 rotation = new Vector3(0, -1.0f * currentRotation, 0);
+            var target = new Quaternion(0, 0, 0, 1);
 
-            Debug.Log("up");
-            Debug.Log("TargetRotation" + rotation);
-
-            this.transform.Rotate(rotation);
+            this.transform.rotation = target;
         }
 
         ////Debug.Log(previousRotation + ", " + currentRotation);// prawo 1,  lewo -1
