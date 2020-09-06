@@ -96,7 +96,10 @@ public class MovementControls : MonoBehaviour
     {
         if (nextFireTime < Time.time)
         {
-            Instantiate(bullet, transform.position, this.transform.rotation);
+            // bullet is created some distance from the tank, so it does not destroy it
+            var initialPosition = transform.position + (transform.forward * 0.25f);
+
+            Instantiate(bullet, initialPosition, this.transform.rotation);
 
             nextFireTime = Time.time + playerFireRate;
         }
