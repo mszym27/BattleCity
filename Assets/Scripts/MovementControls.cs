@@ -4,12 +4,11 @@ using UnityEngine.InputSystem;
 public class MovementControls : MonoBehaviour
 {
     public float playerMovementSpeed = 10.0f;
-    public float playerTurnSpeed = 100.0f;
 
-    public InputAction input;
+    public InputAction moveInput;
+    public InputAction shootInput;
     public CharacterController controller;
-
-    private int previousRotation = 0;
+    public GameObject bullet;
 
     void Start()
     {
@@ -18,12 +17,14 @@ public class MovementControls : MonoBehaviour
 
     private void OnEnable()
     {
-        input.Enable();
+        moveInput.Enable();
+        shootInput.Enable();
     }
 
     private void OnDisable()
     {
-        input.Disable();
+        moveInput.Disable();
+        shootInput.Disable();
     }
 
     //void Update()
@@ -43,36 +44,18 @@ public class MovementControls : MonoBehaviour
 
     public void Update()
     {
-        //Debug.Log(context.control);
-        //Debug.Log(context.ReadValue<Vector2>().ToString());
+        if(shootInput.ReadValue<float>() == 1)
+        {
+            shoot();
+        }
 
-        Vector2 inputVector = input.ReadValue<Vector2>();
+        Vector2 inputVector = moveInput.ReadValue<Vector2>();
         Vector3 finalVector = new Vector3();
 
         finalVector.x = inputVector.x;
         finalVector.z = inputVector.y;
 
         controller.Move(finalVector * Time.deltaTime * playerMovementSpeed);
-
-        ////Debug.Log(finalVector.z); // góra 1, dół -1
-        ////Debug.Log(finalVector.x);// prawo 1,  lewo -1
-
-        //// chcę tylko rotacji w osi y (x), ale o określony kąt, który wykryję dzięki zmianie w z
-
-        ////Vector3 rotation = new Vector3(0, inputVector.x * playerTurnSpeed, 0);
-
-        /*
-góra: 0
-dół: 3.14
-lewo: -1.60
-prawo: 1.60
-         */
-
-
-        Quaternion q = this.transform.rotation;
-        Vector3 v = q.ToEulerAngles();
-        //Debug.Log(v.y);
-        float currentRotation = v.y;
 
         // left
         if (finalVector.x == -1)
@@ -102,29 +85,10 @@ prawo: 1.60
 
             this.transform.rotation = target;
         }
+    }
 
-        ////Debug.Log(previousRotation + ", " + currentRotation);// prawo 1,  lewo -1
-
-        //Debug.Log(this.transform.rotation);
-
-        //previousRotation = currentRotation;
-
-        ////// Rotate the cube by converting the angles into a quaternion.
-        ////Quaternion target = Quaternion.Euler(0, finalVector.x * 1000, finalVector.z * 1000);
-
-        ////this.transform.rotation = Quaternion.Slerp(transform.rotation, target, 10000);
-
-        //float rotationStep = rotationSpeed;
-
-        //Vector3 directionToTarget = targetWaypoint.position - transform.position;
-
-        //Vector2 inputVector = controls.ReadValue<Vector2>();
-        //Vector3 finalVector = new Vector3();
-
-        //finalVector.x = inputVector.x;
-        //finalVector.z = inputVector.y;
-
-        ////controller.Move(finalVector.x * Time.deltaTime * 3.14f);
-        //transform.position = Vector3.MoveTowards(transform.position, finalVector.x, Time.deltaTime * 3.14f);
+    private void shoot()
+    {
+        Instantiate(bullet, transform.position, this.transform.rotation);
     }
 }
