@@ -4,11 +4,14 @@ using UnityEngine.InputSystem;
 public class MovementControls : MonoBehaviour
 {
     public float playerMovementSpeed = 10.0f;
-
     public InputAction moveInput;
-    public InputAction shootInput;
     public CharacterController controller;
+
+    public InputAction shootInput;
     public GameObject bullet;
+    public float playerFireRate = 0.5f;
+
+    private float nextFireTime = 0;
 
     void Start()
     {
@@ -89,6 +92,14 @@ public class MovementControls : MonoBehaviour
 
     private void shoot()
     {
-        Instantiate(bullet, transform.position, this.transform.rotation);
+        if (nextFireTime < Time.time)
+        {
+            Instantiate(bullet, transform.position, this.transform.rotation);
+
+            nextFireTime = Time.time + playerFireRate;
+
+            Debug.Log("Current time " + Time.time);
+            Debug.Log("Next time " + nextFireTime);
+        }
     }
 }
