@@ -339,13 +339,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerTank
       objectReference: {fileID: 0}
+    - target: {fileID: 1000010271102278, guid: bc6259b65c732cf4aa712380492f9692, type: 3}
+      propertyPath: m_TagString
+      value: Indestructible
+      objectReference: {fileID: 0}
     - target: {fileID: 4000011287521776, guid: bc6259b65c732cf4aa712380492f9692, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4000011287521776, guid: bc6259b65c732cf4aa712380492f9692, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.55
+      value: -0.61
       objectReference: {fileID: 0}
     - target: {fileID: 4000011287521776, guid: bc6259b65c732cf4aa712380492f9692, type: 3}
       propertyPath: m_LocalPosition.z
@@ -409,7 +413,7 @@ GameObject:
   - component: {fileID: 70522263}
   m_Layer: 0
   m_Name: InvisibleWallSouth
-  m_TagString: Untagged
+  m_TagString: Indestructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -601,6 +605,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Move Input
       m_Flags: 8
+  controller: {fileID: 274021510}
   shootInput:
     m_Name: Shoot Input
     m_Type: 0
@@ -617,8 +622,8 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Shoot Input
       m_Flags: 0
-  controller: {fileID: 274021510}
   bullet: {fileID: 7445876579508444087, guid: 7f5582571faece342944ecc0d1ba09b5, type: 3}
+  playerFireRate: 0.5
 --- !u!143 &274021510
 CharacterController:
   m_ObjectHideFlags: 0
@@ -835,7 +840,7 @@ GameObject:
   - component: {fileID: 648380808}
   m_Layer: 0
   m_Name: InvisibleWallEast
-  m_TagString: Untagged
+  m_TagString: Indestructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2368,7 +2373,7 @@ GameObject:
   - component: {fileID: 1477001440}
   m_Layer: 0
   m_Name: InvisibleWallNorth
-  m_TagString: Untagged
+  m_TagString: Indestructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2814,7 +2819,7 @@ GameObject:
   - component: {fileID: 1917392061}
   m_Layer: 0
   m_Name: InvisibleWallWest
-  m_TagString: Untagged
+  m_TagString: Indestructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

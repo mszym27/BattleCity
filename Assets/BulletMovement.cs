@@ -40,4 +40,13 @@ public class BulletMovement : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag != "Indestructible")
+        {
+            Destroy(other.gameObject); // this destroys the enemy
+            Destroy(gameObject); // this destroys the bullet
+        }
+    }
 }
