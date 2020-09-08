@@ -25,6 +25,9 @@ public class OptionsControls : MonoBehaviour
     private int menuTopPosition = (int)menuOptions.Sound;
     private int menuBottomPosition = (int)menuOptions.Resolution;
 
+    private int currentResPosition;
+    private ScreenMeasurements[] possibleResolutions;
+
     private int currentCursorPosition;
 
     private void OnEnable()
@@ -32,8 +35,25 @@ public class OptionsControls : MonoBehaviour
         //starting position is always top of the menu
         currentCursorPosition = menuTopPosition;
 
-        var tm = (TextMesh)GameObject.Find("CurrentResolution").GetComponent<TextMesh>();
-        tm.text = Screen.currentResolution.ToString();
+        var currentResolution = Screen.currentResolution;
+
+        displayCurrResAsText(currentResolution);
+        
+        possibleResolutions = new ScreenMeasurements[] {
+            new ScreenMeasurements(640, 480),
+            new ScreenMeasurements(800, 600),
+            new ScreenMeasurements(1280, 960)
+        };
+
+        for (int i = 0; i < possibleResolutions.Length; i++)
+        {
+            currentResPosition = i;
+
+            if(possibleResolutions[i].width == currentResolution.width && possibleResolutions[i].height == currentResolution.height)
+            {
+                break;
+            }
+        }
 
         moveInput.Enable();
         chooseInput.Enable();
@@ -69,6 +89,8 @@ public class OptionsControls : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("Was: " + currentCursorPosition);
+
                     currentCursorPosition += (int)input;
 
                     currentCursorPosition = currentCursorPosition < menuBottomPosition ? menuBottomPosition : currentCursorPosition;
@@ -88,7 +110,7 @@ public class OptionsControls : MonoBehaviour
 
                     transform.position = newPosition;
 
-                    Debug.Log(currentCursorPosition);
+                    Debug.Log("Is: " + currentCursorPosition);
                 }
 
                 nextMoveTime = Time.time + inputDelay;
@@ -104,7 +126,6 @@ public class OptionsControls : MonoBehaviour
                 Debug.Log("Sound");
                 break;
             case (int)menuOptions.Resolution:
-                Debug.Log("Resolution");
                 changeResolution();
                 break;
         }
@@ -113,8 +134,28 @@ public class OptionsControls : MonoBehaviour
 
     private void changeResolution()
     {
-        //Screen.SetResolution(640, 480, true);
-        //Screen.SetResolution(800, 600, true);
-        //Screen.SetResolution(1280, 960, true);
+        currentResPosition++;
+
+        // cycles the indes back to the first position on the list
+        currentResPosition = currentResPosition % possibleResolutions.Length;
+
+        Debug.Log(currentResPosition);
+    }
+
+    private class ScreenMeasurements
+    {
+        public int width;
+        public int height;
+
+        public ScreenMeasurements(int width, int height)
+        {
+            this.width = width;
+            this.height = height;
+        }
+    }
+
+    private void displayCurrResAsText (Resolution currentResolution) {
+        var tm = (TextMesh)GameObject.Find("CurrentResolution").GetComponent<TextMesh>();
+        tm.text = currentResolution.width + " x " + currentResolution.height;
     }
 }
