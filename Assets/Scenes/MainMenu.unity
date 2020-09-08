@@ -625,4 +625,4 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Quit Input
       m_Flags: 0
-  inputDelay: 0.05
+  inputDelay: 0.1

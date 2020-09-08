@@ -29,6 +29,9 @@ public class MainMenuControls : MonoBehaviour
 
     private void OnEnable()
     {
+        //starting position is always top of the menu
+        currentCursorPosition = menuTopPosition;
+
         moveInput.Enable();
         chooseInput.Enable();
     }
@@ -37,12 +40,6 @@ public class MainMenuControls : MonoBehaviour
     {
         moveInput.Disable();
         chooseInput.Disable();
-    }
-
-    void Create()
-    {
-        //starting position is always top of the menu
-        currentCursorPosition = menuTopPosition;
     }
 
     public void Update()
@@ -67,6 +64,8 @@ public class MainMenuControls : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("Before change: " + currentCursorPosition);
+
                     currentCursorPosition += (int)input;
 
                     currentCursorPosition = currentCursorPosition < menuBottomPosition ? menuBottomPosition : currentCursorPosition;
