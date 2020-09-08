@@ -649,6 +649,22 @@ MonoBehaviour:
       m_Flags: 0
   bullet: {fileID: 7445876579508444087, guid: 7f5582571faece342944ecc0d1ba09b5, type: 3}
   playerFireRate: 0.5
+  quitInput:
+    m_Name: Quit Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 4113556b-d292-4ac3-b075-07c5a27df1d4
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: c52a7032-766f-4e6a-81a5-e5c111e6d5c4
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Quit Input
+      m_Flags: 0
 --- !u!143 &274021510
 CharacterController:
   m_ObjectHideFlags: 0

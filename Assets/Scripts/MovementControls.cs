@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class MovementControls : MonoBehaviour
 {
@@ -11,45 +12,44 @@ public class MovementControls : MonoBehaviour
     public GameObject bullet;
     public float playerFireRate = 0.5f;
 
-    private float nextFireTime = 0;
+    public InputAction quitInput;
+
+    private float nextFireTime;
+
+    private const float keyPressedValue = 1;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
+
+        // short delay before allowing to shoot so the player 
+        // does not abuse original game mechanics
+        nextFireTime = Time.time + 0.5f;
     }
 
     private void OnEnable()
     {
         moveInput.Enable();
         shootInput.Enable();
+        quitInput.Enable();
     }
 
     private void OnDisable()
     {
         moveInput.Disable();
         shootInput.Disable();
+        quitInput.Disable();
     }
-
-    //void Update()
-    //{
-    //    //Movement();
-    //    //OnMove();
-    //    Quit();
-    //}
-
-    //void Quit()
-    //{
-    //    if (Keyboard.current.escapeKey.isPressed)
-    //    {
-    //        Application.Quit();
-    //    }
-    //}
 
     public void Update()
     {
-        if(shootInput.ReadValue<float>() == 1)
+        if (shootInput.ReadValue<float>() == keyPressedValue)
         {
             shoot();
+        }
+        else if (quitInput.ReadValue<float>() == keyPressedValue)
+        {
+            SceneManager.LoadScene("MainMenu");
         }
         else
         {

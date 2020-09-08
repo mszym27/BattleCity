@@ -558,19 +558,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1387679660}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc79dbdc523c05f4f8ed2bc3507a5006, type: 3}
+  m_Script: {fileID: 11500000, guid: 51073da707f4fad4a849309664370996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveInput:
     m_Name: Move Input
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: dc09406f-2bbf-4204-967a-d7fb7a92038d
+    m_Id: e2d31a3c-1fe4-4002-b06d-4e2f6ac3c34a
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 1D Axis
-      m_Id: d425ba59-85e5-4182-97a3-17df5a6d0a50
+      m_Id: 1ca79083-80b1-4499-a651-8e5b42a0017f
       m_Path: 1DAxis
       m_Interactions: 
       m_Processors: 
@@ -578,7 +578,7 @@ MonoBehaviour:
       m_Action: Move Input
       m_Flags: 4
     - m_Name: negative
-      m_Id: ac49553b-aff7-4a00-b9b7-b5b8eb5ec865
+      m_Id: 5c56ad4b-7fea-456c-a10f-8140e7f89392
       m_Path: <Keyboard>/downArrow
       m_Interactions: 
       m_Processors: 
@@ -586,7 +586,7 @@ MonoBehaviour:
       m_Action: Move Input
       m_Flags: 8
     - m_Name: positive
-      m_Id: 91b23846-e8c4-44f2-8751-85708ccf11c0
+      m_Id: e33a7854-116e-46e5-bc08-2ea18a9b2bb3
       m_Path: <Keyboard>/upArrow
       m_Interactions: 
       m_Processors: 
@@ -597,16 +597,32 @@ MonoBehaviour:
     m_Name: Choose Input
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 77580c30-cf63-4388-974c-99a5bcc22c60
+    m_Id: 0eb128a8-b1c4-4ce9-a08c-d1ca7693c8ac
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 1db3a1b3-bfde-443a-85cc-de50dccf9ac8
+      m_Id: 0cce371a-31a5-47b1-ab54-336b7f1b1d30
       m_Path: <Keyboard>/space
       m_Interactions: 
       m_Processors: 
       m_Groups: 
       m_Action: Choose Input
       m_Flags: 0
-  inputDelay: 0.5
+  quitInput:
+    m_Name: Quit Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 17db0e98-2c02-46e8-890c-355ee2994c47
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 705e4087-d650-4ce4-b37b-4c5e2c177593
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Quit Input
+      m_Flags: 0
+  inputDelay: 0.05

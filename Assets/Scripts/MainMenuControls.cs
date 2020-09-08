@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
-public class MenuControls : MonoBehaviour
+public class MainMenuControls : MonoBehaviour
 {
     public InputAction moveInput;
     public InputAction chooseInput;
+    public InputAction quitInput;
     public float inputDelay = 0.1f;
 
+    private const float keyPressedValue = 1;
     private float nextMoveTime = 0;
-    private const float spaceKeyValue = 1;
     private const float up = 1;
     private const float down= -1;
 
@@ -24,8 +26,6 @@ public class MenuControls : MonoBehaviour
     private int menuBottomPosition = (int)menuOptions.Credits;
 
     private int currentCursorPosition;
-    
-    //public CharacterController controller;
 
     private void OnEnable()
     {
@@ -39,21 +39,6 @@ public class MenuControls : MonoBehaviour
         chooseInput.Disable();
     }
 
-    //void Update()
-    //{
-    //    //Movement();
-    //    //OnMove();
-    //    Quit();
-    //}
-
-    //void Quit()
-    //{
-    //    if (Keyboard.current.escapeKey.isPressed)
-    //    {
-    //        Application.Quit();
-    //    }
-    //}
-
     void Create()
     {
         //starting position is always top of the menu
@@ -62,7 +47,11 @@ public class MenuControls : MonoBehaviour
 
     public void Update()
     {
-        if (chooseInput.ReadValue<float>() == spaceKeyValue)
+        if (quitInput.ReadValue<float>() == keyPressedValue)
+        {
+            Application.Quit();
+        }
+        else if(chooseInput.ReadValue<float>() == keyPressedValue)
         {
             choose();
         }
@@ -108,41 +97,6 @@ public class MenuControls : MonoBehaviour
 
                 nextMoveTime = Time.time + inputDelay;
             }
-            //Vector3 finalVector = new Vector3();
-
-            //finalVector.x = inputVector.x;
-            //finalVector.z = inputVector.y;
-
-            //controller.Move(finalVector * Time.deltaTime * playerMovementSpeed);
-
-            //// left
-            //if (finalVector.x == -1)
-            //{
-            //    var target = new Quaternion(0, -0.7f, 0, 0.7f);
-
-            //    this.transform.rotation = target;
-            //}
-            //// right
-            //if (finalVector.x == 1)
-            //{
-            //    var target = new Quaternion(0, 0.7f, 0, 0.7f);
-
-            //    this.transform.rotation = target;
-            //}
-            // down
-            ////if (finalVector.z == -1)
-            ////{
-            ////    var target = new Quaternion(0, -0.7f, 0, 0);
-
-            ////    this.transform.rotation = target;
-            ////}
-            ////// up
-            ////if (finalVector.z == 1)
-            ////{
-            ////    var target = new Quaternion(0, 0, 0, 1);
-
-            ////    this.transform.rotation = target;
-            ////}
         }
     }
 
@@ -151,7 +105,7 @@ public class MenuControls : MonoBehaviour
         switch (currentCursorPosition)
         {
             case (int) menuOptions.OnePlayer:
-                Debug.Log("OnePlayer");
+                SceneManager.LoadScene("Level");
                 break;
             case (int) menuOptions.TwoPlayers:
                 Debug.Log("TwoPlayers");
@@ -160,11 +114,8 @@ public class MenuControls : MonoBehaviour
                 Debug.Log("Options");
                 break;
             case (int) menuOptions.Credits:
-                Debug.Log("Credits");
+                SceneManager.LoadScene("Credits");
                 break;
-            //default:
-            //    Debug.Log("Choose!");
-            //    break;
         }
     }
 }

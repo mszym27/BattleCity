@@ -5,10 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/ButtonRemapScreen.unity
-    guid: 6d897b03f2c393542b51d405e97f9f92
-  - enabled: 0
-    path: Assets/Scenes/NewInput.unity
-    guid: 37961ba4d27bd46428d20c2ffe403dc3
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 364801b66bccc3648b223ecba6589768
+  - enabled: 1
+    path: Assets/Scenes/Level.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: c47e44c1805f9d1408ff0643e41d4bc9
   m_configObjects: {}
