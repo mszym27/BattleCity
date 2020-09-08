@@ -34,12 +34,14 @@ public class MainMenuControls : MonoBehaviour
 
         moveInput.Enable();
         chooseInput.Enable();
+        quitInput.Enable();
     }
 
     private void OnDisable()
     {
         moveInput.Disable();
         chooseInput.Disable();
+        quitInput.Disable();
     }
 
     public void Update()
@@ -90,8 +92,6 @@ public class MainMenuControls : MonoBehaviour
                     }
 
                     transform.position = newPosition;
-
-                    Debug.Log(currentCursorPosition);
                 }
 
                 nextMoveTime = Time.time + inputDelay;
@@ -110,7 +110,7 @@ public class MainMenuControls : MonoBehaviour
                 Debug.Log("TwoPlayers");
                 break;
             case (int) menuOptions.Options:
-                Debug.Log("Options");
+                SceneManager.LoadScene("Options");
                 break;
             case (int) menuOptions.Credits:
                 SceneManager.LoadScene("Credits");
