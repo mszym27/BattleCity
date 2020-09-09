@@ -9,10 +9,11 @@ public class OptionsControls : MonoBehaviour
     public InputAction quitInput;
     public float inputDelay = 0.1f;
 
-    private int currentVolume = 5;
+    private int currentSoundVolume = 5;
+    private int currentSoundDirection = -1;
 
     private const float keyPressedValue = 1;
-    private float nextMoveTime = 0;
+    private float nextInputTime = 0;
     private const float up = 1;
     private const float down = -1;
 
@@ -27,6 +28,7 @@ public class OptionsControls : MonoBehaviour
 
     private int currentResPosition;
     private ScreenMeasurements[] possibleResolutions;
+    private GameObject[] bands;
 
     private int currentCursorPosition;
 
@@ -55,6 +57,13 @@ public class OptionsControls : MonoBehaviour
             }
         }
 
+        bands = new GameObject[5];
+
+        for (int i = 1; i <= 5; i++)
+        {
+            bands[i - 1] = GameObject.Find("Band" + i);
+        }
+
         moveInput.Enable();
         chooseInput.Enable();
         quitInput.Enable();
@@ -69,17 +78,17 @@ public class OptionsControls : MonoBehaviour
 
     public void Update()
     {
-        if (quitInput.ReadValue<float>() == keyPressedValue)
+        if (nextInputTime < Time.time)
         {
-            SceneManager.LoadScene("MainMenu");
-        }
-        else if (chooseInput.ReadValue<float>() == keyPressedValue)
-        {
-            choose();
-        }
-        else
-        {
-            if (nextMoveTime < Time.time)
+            if (quitInput.ReadValue<float>() == keyPressedValue)
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
+            else if (chooseInput.ReadValue<float>() == keyPressedValue)
+            {
+                choose();
+            }
+            else
             {
                 var input = moveInput.ReadValue<float>();
 
@@ -89,8 +98,6 @@ public class OptionsControls : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Was: " + currentCursorPosition);
-
                     currentCursorPosition += (int)input;
 
                     currentCursorPosition = currentCursorPosition < menuBottomPosition ? menuBottomPosition : currentCursorPosition;
@@ -101,20 +108,20 @@ public class OptionsControls : MonoBehaviour
                     switch (currentCursorPosition)
                     {
                         case (int)menuOptions.Sound:
-                            newPosition.y = 2.5f;
+                            newPosition.x = -27.5f;
+                            newPosition.y = 8.5f;
                             break;
                         case (int)menuOptions.Resolution:
-                            newPosition.y = -2;
+                            newPosition.x = -33.5f;
+                            newPosition.y = -0.8f;
                             break;
                     }
 
                     transform.position = newPosition;
-
-                    Debug.Log("Is: " + currentCursorPosition);
                 }
-
-                nextMoveTime = Time.time + inputDelay;
             }
+
+            nextInputTime = Time.time + inputDelay;
         }
     }
 
@@ -123,14 +130,13 @@ public class OptionsControls : MonoBehaviour
         switch (currentCursorPosition)
         {
             case (int)menuOptions.Sound:
-                Debug.Log("Sound");
+                changeSound();
                 break;
             case (int)menuOptions.Resolution:
                 changeResolution();
                 break;
         }
     }
-
 
     private void changeResolution()
     {
@@ -139,7 +145,37 @@ public class OptionsControls : MonoBehaviour
         // cycles the indes back to the first position on the list
         currentResPosition = currentResPosition % possibleResolutions.Length;
 
-        Debug.Log(currentResPosition);
+        Screen.SetResolution(possibleResolutions[currentResPosition].width, possibleResolutions[currentResPosition].height, true);
+
+        var currentResolution = Screen.currentResolution;
+
+        displayCurrResAsText(Screen.currentResolution);
+    }
+
+
+    private void changeSound()
+    {
+        currentSoundVolume = currentSoundVolume + currentSoundDirection;
+
+        // bounces the sound in the alternate direction on hitting the border
+        currentSoundDirection = currentSoundVolume == 1? 1 : currentSoundDirection;
+        currentSoundDirection = currentSoundVolume == 5 ? -1 : currentSoundDirection;
+
+        for (int i = 1; i <= 5; i++)
+        {
+            bands[i - 1].SetActive(false);
+        }
+
+        for (int i = 1; i <= currentSoundVolume; i++)
+        {
+            bands[i - 1].SetActive(true);
+        }
+    }
+
+    private void displayCurrResAsText(Resolution currentResolution)
+    {
+        var tm = (TextMesh)GameObject.Find("CurrentResolution").GetComponent<TextMesh>();
+        tm.text = currentResolution.width + " x " + currentResolution.height;
     }
 
     private class ScreenMeasurements
@@ -152,10 +188,5 @@ public class OptionsControls : MonoBehaviour
             this.width = width;
             this.height = height;
         }
-    }
-
-    private void displayCurrResAsText (Resolution currentResolution) {
-        var tm = (TextMesh)GameObject.Find("CurrentResolution").GetComponent<TextMesh>();
-        tm.text = currentResolution.width + " x " + currentResolution.height;
     }
 }
