@@ -46,17 +46,17 @@ public class MainMenuControls : MonoBehaviour
 
     public void Update()
     {
-        if (quitInput.ReadValue<float>() == keyPressedValue)
+        if (nextMoveTime < Time.time)
         {
-            Application.Quit();
-        }
-        else if(chooseInput.ReadValue<float>() == keyPressedValue)
-        {
-            choose();
-        }
-        else
-        {
-            if (nextMoveTime < Time.time)
+            if (quitInput.ReadValue<float>() == keyPressedValue)
+            {
+                Application.Quit();
+            }
+            else if (chooseInput.ReadValue<float>() == keyPressedValue)
+            {
+                choose();
+            }
+            else
             {
                 var input = moveInput.ReadValue<float>();
 
@@ -93,9 +93,9 @@ public class MainMenuControls : MonoBehaviour
 
                     transform.position = newPosition;
                 }
-
-                nextMoveTime = Time.time + inputDelay;
             }
+
+            nextMoveTime = Time.time + inputDelay;
         }
     }
 

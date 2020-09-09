@@ -9,7 +9,7 @@ public class OptionsControls : MonoBehaviour
     public InputAction quitInput;
     public float inputDelay = 0.1f;
 
-    private int currentSoundVolume = 5;
+    private int currentSoundVolume;
     private int currentSoundDirection = -1;
 
     private const float keyPressedValue = 1;
@@ -23,6 +23,8 @@ public class OptionsControls : MonoBehaviour
         Resolution = 1
     }
 
+    //private GameObject gameSettings;
+
     private int menuTopPosition = (int)menuOptions.Sound;
     private int menuBottomPosition = (int)menuOptions.Resolution;
 
@@ -34,6 +36,12 @@ public class OptionsControls : MonoBehaviour
 
     private void OnEnable()
     {
+        ////get object that is used to pass setting values between the scenes
+        //gameSettings = GameObject.Find("GameSettings");
+
+        ////...And prevent it from destruction
+        //DontDestroyOnLoad(gameSettings);
+
         //starting position is always top of the menu
         currentCursorPosition = menuTopPosition;
 
@@ -63,6 +71,12 @@ public class OptionsControls : MonoBehaviour
         {
             bands[i - 1] = GameObject.Find("Band" + i);
         }
+
+        currentSoundVolume = PlayerPrefs.GetInt("soundVolume", 5);
+
+        currentSoundVolume = currentSoundVolume > 5 ? 5 : currentSoundVolume;
+
+        showSound(currentSoundVolume);
 
         moveInput.Enable();
         chooseInput.Enable();
@@ -155,11 +169,21 @@ public class OptionsControls : MonoBehaviour
 
     private void changeSound()
     {
+        // bounces the sound in the alternate direction on hitting the border
+        currentSoundDirection = currentSoundVolume == 0 ? 1 : currentSoundDirection;
+        currentSoundDirection = currentSoundVolume == 5 ? -1 : currentSoundDirection;
+
         currentSoundVolume = currentSoundVolume + currentSoundDirection;
 
-        // bounces the sound in the alternate direction on hitting the border
-        currentSoundDirection = currentSoundVolume == 1? 1 : currentSoundDirection;
-        currentSoundDirection = currentSoundVolume == 5 ? -1 : currentSoundDirection;
+        showSound(currentSoundVolume);
+
+        PlayerPrefs.SetInt("soundVolume", currentSoundVolume == 0 ? currentSoundVolume : currentSoundVolume + 1);
+        //PlayerPrefs.SetInt("soundVolume", currentSoundVolume);
+    }
+
+    private void showSound(int currentSoundVolume)
+    {
+        Debug.Log(currentSoundVolume);
 
         for (int i = 1; i <= 5; i++)
         {
