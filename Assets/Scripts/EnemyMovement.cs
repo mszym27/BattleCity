@@ -10,7 +10,7 @@ public class EnemyMovement : MonoBehaviour
     private float minDistance = 0.1f; //If the distance between the enemy and the waypoint is less than this, then it has reacehd the waypoint
     private int lastWaypointIndex;
 
-    private float movementSpeed = 5.0f;
+    private float movementSpeed = 2.5f;
     private float rotationSpeed = 2.0f;
 
     // Start is called before the first frame update
