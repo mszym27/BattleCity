@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public List<Transform> waypoints = new List<Transform>();
+    public GameObject enemyBullet;
+    public float enemyFireRate = 1;
+    public int numberOfWaypoints = 7;
+
+    private float nextFireTime;
+
+    private List<Transform> waypoints = new List<Transform>();
     private Transform targetWaypoint;
     private int targetWaypointIndex = 0;
     private float minDistance = 0.1f; //If the distance between the enemy and the waypoint is less than this, then it has reacehd the waypoint
@@ -16,6 +22,17 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject currentWaypoint;
+
+        for (int i = 1; i <= numberOfWaypoints; i++)
+        {
+            currentWaypoint = GameObject.Find("Waypoint" + i);
+
+            waypoints.Add(currentWaypoint.GetComponent<Transform>());
+        }
+
+        nextFireTime = Time.time + enemyFireRate;
+
         lastWaypointIndex = waypoints.Count - 1;
         targetWaypoint = waypoints[targetWaypointIndex]; //Set the first target waypoint at the start so the enemy starts moving towards a waypoint
     }
@@ -63,5 +80,18 @@ public class EnemyMovement : MonoBehaviour
         }
 
         targetWaypoint = waypoints[targetWaypointIndex];
+    }
+
+    private void shoot()
+    {
+        if (nextFireTime < Time.time)
+        {
+            // bullet is created some distance from the tank, so it does not destroy it
+            var initialPosition = transform.position + (transform.forward * 0.25f);
+
+            Instantiate(enemyBullet, initialPosition, this.transform.rotation);
+
+            nextFireTime = Time.time + enemyFireRate;
+        }
     }
 }
