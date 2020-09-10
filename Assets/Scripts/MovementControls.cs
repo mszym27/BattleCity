@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class MovementControls : MonoBehaviour
 {
-    public float playerMovementSpeed = 10.0f;
+    public float playerMovementSpeed = 5.0f;
     public InputAction moveInput;
     public CharacterController controller;
 
