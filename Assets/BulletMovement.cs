@@ -45,8 +45,9 @@ public class BulletMovement : MonoBehaviour
     {
         if (other.gameObject.tag != "Indestructible")
         {
-            Destroy(other.gameObject); // this destroys the enemy
-            Destroy(gameObject); // this destroys the bullet
+            Destroy(other.gameObject);
         }
+
+        Destroy(gameObject); // destroy the bullet
     }
 }

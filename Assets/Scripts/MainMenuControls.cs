@@ -32,6 +32,8 @@ public class MainMenuControls : MonoBehaviour
         //starting position is always top of the menu
         currentCursorPosition = menuTopPosition;
 
+        nextMoveTime = Time.time + inputDelay;
+
         moveInput.Enable();
         chooseInput.Enable();
         quitInput.Enable();
