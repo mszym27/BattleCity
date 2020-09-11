@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EWnemyBulletMovement : MonoBehaviour
+public class EnemyBulletMovement : MonoBehaviour
 {
-    public float movementSpeed = 10.0f;
+    public float movementSpeed = 5;
 
     private const float BoardConstraintSouth = -9.5f;
     private const float BoardConstraintNorth = 3.5f;

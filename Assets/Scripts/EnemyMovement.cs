@@ -5,15 +5,16 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public GameObject enemyBullet;
-    public float enemyFireRate = 1;
-    public int numberOfWaypoints = 7;
+    public float enemyFireRate = 0.5f;
+    private float stopForTime = 5;
 
     private float nextFireTime;
 
     private List<Transform> waypoints = new List<Transform>();
+    private int numberOfWaypoints;
     private Transform targetWaypoint;
     private int targetWaypointIndex = 0;
-    private float minDistance = 0.1f; //If the distance between the enemy and the waypoint is less than this, then it has reacehd the waypoint
+    private float minDistance = 0.1f; //If the distance between the enemy and the waypoint is less than this, then it has reached the waypoint
     private int lastWaypointIndex;
 
     private float movementSpeed = 2.5f;
@@ -22,6 +23,9 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var waypointsObject = GameObject.Find("Waypoints");
+        numberOfWaypoints = waypointsObject.GetComponent<Transform>().childCount;
+
         GameObject currentWaypoint;
 
         for (int i = 1; i <= numberOfWaypoints; i++)
@@ -32,6 +36,8 @@ public class EnemyMovement : MonoBehaviour
         }
 
         nextFireTime = Time.time + enemyFireRate;
+
+        //Debug.Log(nextFireTime);
 
         lastWaypointIndex = waypoints.Count - 1;
         targetWaypoint = waypoints[targetWaypointIndex]; //Set the first target waypoint at the start so the enemy starts moving towards a waypoint
@@ -45,15 +51,22 @@ public class EnemyMovement : MonoBehaviour
         Vector3 directionToTarget = targetWaypoint.position - transform.position;
         Quaternion rotationToTarget = Quaternion.LookRotation(directionToTarget); 
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotationToTarget, rotationStep); 
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotationToTarget, rotationStep);
 
-        Debug.DrawRay(transform.position, transform.forward * 50f, Color.green, 0f); //Draws a ray forward in the direction the enemy is facing
-        Debug.DrawRay(transform.position, directionToTarget, Color.red, 0f); //Draws a ray in the direction of the current target waypoint
+        //Debug.DrawRay(transform.position, transform.forward * 50f, Color.green, 0f); //Draws a ray forward in the direction the enemy is facing
+        //Debug.DrawRay(transform.position, directionToTarget, Color.red, 0f); //Draws a ray in the direction of the current target waypoint
 
-        float distance = Vector3.Distance(transform.position, targetWaypoint.position);
-        CheckDistanceToWaypoint(distance);
+        shoot();
 
-        transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.position, movementStep);
+        //if (!shot)
+        //{
+            float distance = Vector3.Distance(transform.position, targetWaypoint.position);
+            CheckDistanceToWaypoint(distance);
+
+            transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.position, movementStep);
+
+        //    nextFireTime
+        //}
 	}
 
     /// <summary>

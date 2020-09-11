@@ -10,7 +10,7 @@ public class MovementControls : MonoBehaviour
 
     public InputAction shootInput;
     public GameObject bullet;
-    public float playerFireRate = 0.5f;
+    public float playerFireRate;
 
     public InputAction quitInput;
 
@@ -24,7 +24,7 @@ public class MovementControls : MonoBehaviour
 
         // short delay before allowing to shoot so the player 
         // does not abuse original game mechanics
-        nextFireTime = Time.time + 0.5f;
+        nextFireTime = Time.time + playerFireRate;
     }
 
     private void OnEnable()

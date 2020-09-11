@@ -6,21 +6,29 @@ public class SpawnEnemy : MonoBehaviour
 {
     public GameObject enemy;
 
-    public float spawnDelay = 5;
+    public float spawnDelay;
+    public int maxEnemyNum;
+
+    private int currentEnemyNum = 0;
     private float nextSpawnTime;
 
     void Start()
     {
-        nextSpawnTime = Time.time + spawnDelay;
+        nextSpawnTime = 0; // spawn an enemy immediately, and then wait the delay
     }
 
     void Update()
     {
-        if (nextSpawnTime < Time.time)
+        if(currentEnemyNum < maxEnemyNum)
         {
-            Instantiate(enemy, this.transform.position, this.transform.rotation);
+            if (nextSpawnTime < Time.time)
+            {
+                Instantiate(enemy, this.transform.position, this.transform.rotation);
 
-            nextSpawnTime = Time.time + spawnDelay;
+                currentEnemyNum++;
+
+                nextSpawnTime = nextSpawnTime + spawnDelay;
+            }
         }
     }
 }
