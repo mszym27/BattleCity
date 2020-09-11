@@ -68,8 +68,6 @@ public class MainMenuControls : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Before change: " + currentCursorPosition);
-
                     currentCursorPosition += (int)input;
 
                     currentCursorPosition = currentCursorPosition < menuBottomPosition ? menuBottomPosition : currentCursorPosition;

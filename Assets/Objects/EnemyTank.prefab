@@ -223,6 +223,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyBullet: {fileID: 4165608322428459400, guid: 5f54ce31c01df3a46a0747a0be2b16ce,
     type: 3}
+  enemyFireRate: 3
+  stopForTime: 1
 --- !u!1 &268946362025344294
 GameObject:
   m_ObjectHideFlags: 0

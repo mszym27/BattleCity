@@ -5,10 +5,11 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public GameObject enemyBullet;
-    public float enemyFireRate = 0.5f;
-    private float stopForTime = 5;
+    public float enemyFireRate;
+    public float stopForTime;
 
     private float nextFireTime;
+    private float nextStopTime;
 
     private List<Transform> waypoints = new List<Transform>();
     private int numberOfWaypoints;
@@ -43,31 +44,31 @@ public class EnemyMovement : MonoBehaviour
         targetWaypoint = waypoints[targetWaypointIndex]; //Set the first target waypoint at the start so the enemy starts moving towards a waypoint
     }
 
-	// Update is called once per frame
-	void Update () {
-        float movementStep = movementSpeed * Time.deltaTime;
-        float rotationStep = rotationSpeed;
+    // Update is called once per frame
+    void Update()
+    {
+        // stop for a moment before shooting
+        if (nextStopTime < Time.time)
+        {
+            float movementStep = movementSpeed * Time.deltaTime;
+            float rotationStep = rotationSpeed;
 
-        Vector3 directionToTarget = targetWaypoint.position - transform.position;
-        Quaternion rotationToTarget = Quaternion.LookRotation(directionToTarget); 
+            Vector3 directionToTarget = targetWaypoint.position - transform.position;
+            Quaternion rotationToTarget = Quaternion.LookRotation(directionToTarget);
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotationToTarget, rotationStep);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotationToTarget, rotationStep);
 
-        //Debug.DrawRay(transform.position, transform.forward * 50f, Color.green, 0f); //Draws a ray forward in the direction the enemy is facing
-        //Debug.DrawRay(transform.position, directionToTarget, Color.red, 0f); //Draws a ray in the direction of the current target waypoint
+            Debug.DrawRay(transform.position, transform.forward * 50f, Color.green, 0f); //Draws a ray forward in the direction the enemy is facing
+            Debug.DrawRay(transform.position, directionToTarget, Color.red, 0f); //Draws a ray in the direction of the current target waypoint
 
-        shoot();
-
-        //if (!shot)
-        //{
             float distance = Vector3.Distance(transform.position, targetWaypoint.position);
             CheckDistanceToWaypoint(distance);
 
             transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.position, movementStep);
+        }
 
-        //    nextFireTime
-        //}
-	}
+        shoot();
+    }
 
     /// <summary>
     /// Checks to see if the enemy is within distance of the waypoint. If it is, it called the UpdateTargetWaypoint function 
@@ -75,7 +76,7 @@ public class EnemyMovement : MonoBehaviour
     /// <param name="currentDistance">The enemys current distance from the waypoint</param>
     void CheckDistanceToWaypoint(float currentDistance)
     {
-        if(currentDistance <= minDistance)
+        if (currentDistance <= minDistance)
         {
             targetWaypointIndex++;
             UpdateTargetWaypoint();
@@ -87,7 +88,7 @@ public class EnemyMovement : MonoBehaviour
     /// </summary>
     void UpdateTargetWaypoint()
     {
-        if(targetWaypointIndex > lastWaypointIndex)
+        if (targetWaypointIndex > lastWaypointIndex)
         {
             targetWaypointIndex = 0;
         }
@@ -102,9 +103,10 @@ public class EnemyMovement : MonoBehaviour
             // bullet is created some distance from the tank, so it does not destroy it
             var initialPosition = transform.position + (transform.forward * 0.25f);
 
-            Instantiate(enemyBullet, initialPosition, this.transform.rotation);
+            Instantiate(enemyBullet, initialPosition, Quaternion.Euler(transform.forward));
 
             nextFireTime = Time.time + enemyFireRate;
+            nextStopTime = nextFireTime - stopForTime;
         }
     }
 }

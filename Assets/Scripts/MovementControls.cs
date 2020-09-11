@@ -22,7 +22,7 @@ public class MovementControls : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
 
-        // short delay before allowing to shoot so the player 
+        // short delay before allowing to Shoot so the player 
         // does not abuse original game mechanics
         nextFireTime = Time.time + playerFireRate;
     }
@@ -45,7 +45,7 @@ public class MovementControls : MonoBehaviour
     {
         if (shootInput.ReadValue<float>() == keyPressedValue)
         {
-            shoot();
+            Shoot();
         }
         else if (quitInput.ReadValue<float>() == keyPressedValue)
         {
@@ -92,7 +92,7 @@ public class MovementControls : MonoBehaviour
         }
     }
 
-    private void shoot()
+    private void Shoot()
     {
         if (nextFireTime < Time.time)
         {
@@ -100,6 +100,9 @@ public class MovementControls : MonoBehaviour
             var initialPosition = transform.position + (transform.forward * 0.25f);
 
             Instantiate(bullet, initialPosition, this.transform.rotation);
+
+            Debug.Log("Bullet spawned with position " + initialPosition);
+            Debug.Log("Bullet spawned with rotation " + this.transform.rotation);
 
             nextFireTime = Time.time + playerFireRate;
         }

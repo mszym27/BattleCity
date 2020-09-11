@@ -5067,8 +5067,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 268946362025344292, guid: ed8d3c2ef22c3fd45b848029d43b6134, type: 3}
-  spawnDelay: 1
-  maxEnemyNum: 5
+  spawnDelay: 5
+  maxEnemyNum: 1
 --- !u!1 &475347651
 GameObject:
   m_ObjectHideFlags: 0
