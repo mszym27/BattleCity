@@ -9,12 +9,18 @@ public class SpawnEnemy : MonoBehaviour
     public float spawnDelay;
     public int maxEnemyNum;
 
-    private int currentEnemyNum = 0;
+    private int currentEnemyNum;
     private float nextSpawnTime;
+
+    private GameObject enemyNumber;
 
     void Start()
     {
+        currentEnemyNum = 0;
+
         nextSpawnTime = 0; // spawn an enemy immediately, and then wait the delay
+
+        enemyNumber = GameObject.Find("EnemyNumber");
     }
 
     void Update()
@@ -28,6 +34,9 @@ public class SpawnEnemy : MonoBehaviour
                 currentEnemyNum++;
 
                 nextSpawnTime = nextSpawnTime + spawnDelay;
+
+                var scriptRef = enemyNumber.GetComponent<TextValue>();
+                scriptRef.currentNumberOfEnemies = currentEnemyNum;
             }
         }
     }
