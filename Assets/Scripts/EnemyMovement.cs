@@ -9,7 +9,6 @@ public class EnemyMovement : MonoBehaviour
     public float enemyFireRate;
     public float stopForTime;
 
-    private float nextFireTime;
     private float nextStopTime;
 
     private List<Transform> waypoints = new List<Transform>();
@@ -41,8 +40,6 @@ public class EnemyMovement : MonoBehaviour
             waypoints.Add(currentWaypoint.GetComponent<Transform>());
         }
 
-        nextFireTime = Time.time + enemyFireRate;
-
         lastWaypointIndex = waypoints.Count - 1;
         targetWaypoint = waypoints[targetWaypointIndex]; //Set the first target waypoint at the start so the enemy starts moving towards a waypoint
     }
@@ -50,7 +47,7 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         // stop for a moment after reaching waypoint
-        if (nextStopTime < Time.time)
+        if (Time.time > nextStopTime)
         {
             float movementStep = movementSpeed * Time.deltaTime;
             float rotationStep = rotationSpeed;
@@ -100,23 +97,19 @@ public class EnemyMovement : MonoBehaviour
 
     private void shoot()
     {
-        if (nextFireTime < Time.time)
-        {
-            var initialPosition = transform.position;
+        var initialPosition = transform.position;
 
-            var initialRotation = new Quaternion(0, this.transform.rotation.y, 0, this.transform.rotation.w);
+        var initialRotation = new Quaternion(0, this.transform.rotation.y, 0, this.transform.rotation.w);
 
-            Instantiate(enemyBullet, initialPosition, initialRotation);
+        Instantiate(enemyBullet, initialPosition, initialRotation);
 
-            var scriptRef = enemyBullet.GetComponent<EnemyBulletMovement>();
+        var scriptRef = enemyBullet.GetComponent<EnemyBulletMovement>();
 
-            scriptRef.chosenDirection = Random.Range(1, 4);
-            scriptRef.initialTransform = transform;
-            scriptRef.initialWaypoint = targetWaypointIndex + 1;
-            scriptRef.bulletNumber = bulletNumber++;
+        scriptRef.chosenDirection = Random.Range(1, 4);
+        scriptRef.initialTransform = transform;
+        scriptRef.initialWaypoint = targetWaypointIndex + 1;
+        scriptRef.bulletNumber = bulletNumber++;
 
-            nextFireTime = Time.time + enemyFireRate;
-            nextStopTime = nextFireTime - stopForTime;
-        }
+        nextStopTime = Time.time + stopForTime;
     }
 }
