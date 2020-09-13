@@ -221,9 +221,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c35b2c156926434cb936e21d468a12a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyBullet: {fileID: 4165608322428459400, guid: 5f54ce31c01df3a46a0747a0be2b16ce,
+  enemyTarget: {fileID: 0}
+  enemyBullet: {fileID: 1559348925436463331, guid: 722be21a92fdd9a4ca0dd4fe29da94f6,
     type: 3}
-  enemyFireRate: 3
+  enemyFireRate: 0.5
   stopForTime: 1
 --- !u!1 &268946362025344294
 GameObject:

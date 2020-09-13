@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    public GameObject enemyTarget;
     public GameObject enemyBullet;
     public float enemyFireRate;
     public float stopForTime;
@@ -20,6 +21,10 @@ public class EnemyMovement : MonoBehaviour
 
     private float movementSpeed = 2.5f;
     private float rotationSpeed = 2.0f;
+
+    private int chosenDirection = 1;
+
+    private int bulletNumber = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -38,16 +43,13 @@ public class EnemyMovement : MonoBehaviour
 
         nextFireTime = Time.time + enemyFireRate;
 
-        //Debug.Log(nextFireTime);
-
         lastWaypointIndex = waypoints.Count - 1;
         targetWaypoint = waypoints[targetWaypointIndex]; //Set the first target waypoint at the start so the enemy starts moving towards a waypoint
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // stop for a moment before shooting
+        // stop for a moment after reaching waypoint
         if (nextStopTime < Time.time)
         {
             float movementStep = movementSpeed * Time.deltaTime;
@@ -66,8 +68,6 @@ public class EnemyMovement : MonoBehaviour
 
             transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.position, movementStep);
         }
-
-        shoot();
     }
 
     /// <summary>
@@ -78,6 +78,8 @@ public class EnemyMovement : MonoBehaviour
     {
         if (currentDistance <= minDistance)
         {
+            shoot();
+
             targetWaypointIndex++;
             UpdateTargetWaypoint();
         }
@@ -100,10 +102,34 @@ public class EnemyMovement : MonoBehaviour
     {
         if (nextFireTime < Time.time)
         {
-            // bullet is created some distance from the tank, so it does not destroy it
-            var initialPosition = transform.position + (transform.forward * 0.25f);
 
-            Instantiate(enemyBullet, initialPosition, Quaternion.Euler(transform.forward));
+            var initialPosition = transform.position;
+
+            var initialRotation = new Quaternion(0, this.transform.rotation.y, 0, this.transform.rotation.w);
+
+            initialRotation = new Quaternion(0, -0.7f, 0, 0.7f); // left
+
+            //Debug.Log("Enemy bullet spawned with position " + initialPosition);
+            //Debug.Log("Enemy bullet spawned with rotation " + initialRotation);
+
+            Instantiate(enemyBullet, initialPosition, initialRotation);
+
+            var scriptRef = enemyBullet.GetComponent<EnemyBulletMovement>();
+
+            ////var emptyGO = new GameObject();
+            //var targetTransform = enemyTarget.transform;
+
+            ////targetTransform.position.x = transform.forward.x * 50f;
+            ////targetTransform.position.y = transform.forward.y * 50f;
+            ////targetTransform.position.z = transform.forward.z * 50f;
+
+            ////Instantiate(enemyTarget, initialPosition, initialRotation);
+
+            //scriptRef.targetTransform = targetTransform;
+
+            scriptRef.chosenDirection = Random.Range(1, 4);
+            scriptRef.initialWaypoint = targetWaypointIndex + 1;
+            scriptRef.bulletNumber = bulletNumber++;
 
             nextFireTime = Time.time + enemyFireRate;
             nextStopTime = nextFireTime - stopForTime;
