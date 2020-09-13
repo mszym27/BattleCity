@@ -24,6 +24,8 @@ public class EnemyMovement : MonoBehaviour
     private int chosenDirection = 1;
 
     private int bulletNumber = 0;
+    private GameObject enemyNumber;
+    private GameObject spawnpoint;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +44,9 @@ public class EnemyMovement : MonoBehaviour
 
         lastWaypointIndex = waypoints.Count - 1;
         targetWaypoint = waypoints[targetWaypointIndex]; //Set the first target waypoint at the start so the enemy starts moving towards a waypoint
+
+        enemyNumber = GameObject.Find("EnemyNumber");
+        spawnpoint = GameObject.Find("Spawnpoint");
     }
 
     void Update()
@@ -111,5 +116,22 @@ public class EnemyMovement : MonoBehaviour
         scriptRef.bulletNumber = bulletNumber++;
 
         nextStopTime = Time.time + stopForTime;
+    }
+
+    void OnDestroy()
+    {
+        var scriptRef = enemyNumber.GetComponent<TextValue>();
+        scriptRef.currentNumberOfEnemies += 1;
+
+        var spawnScriptRef = enemyNumber.GetComponent<SpawnEnemy>();
+        spawnScriptRef.currentEnemyNum -= 1;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            Physics.IgnoreCollision(other.collider, GetComponent<Collider>());
+        }
     }
 }

@@ -90,8 +90,6 @@ public class EnemyBulletMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Collision");
-
         if (other.gameObject.tag != "Enemy") // as in original game their bullets will pass through other enemy tanks
         {
             if (other.gameObject.tag != "Indestructible")
