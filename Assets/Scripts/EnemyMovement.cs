@@ -102,7 +102,6 @@ public class EnemyMovement : MonoBehaviour
     {
         if (nextFireTime < Time.time)
         {
-
             var initialPosition = transform.position;
 
             var initialRotation = new Quaternion(0, this.transform.rotation.y, 0, this.transform.rotation.w);
@@ -128,6 +127,7 @@ public class EnemyMovement : MonoBehaviour
             //scriptRef.targetTransform = targetTransform;
 
             scriptRef.chosenDirection = Random.Range(1, 4);
+            scriptRef.initialTransform = transform;
             scriptRef.initialWaypoint = targetWaypointIndex + 1;
             scriptRef.bulletNumber = bulletNumber++;
 

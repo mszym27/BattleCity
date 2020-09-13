@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2610635660069563939}
   - component: {fileID: 2519106215096298348}
   m_Layer: 0
-  m_Name: EnemyBullet 1
+  m_Name: EnemyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,3 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   chosenDirection: 0
+  initialWaypoint: 0
+  lifeTime: 5
+  target: {fileID: 1258064701107573920, guid: ca67119058151e444b7d641e20bf48c0, type: 3}
+  bulletNumber: 0
